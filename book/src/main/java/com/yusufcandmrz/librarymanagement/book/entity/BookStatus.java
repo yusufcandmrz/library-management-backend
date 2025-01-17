@@ -1,4 +1,4 @@
-package com.yusufcandmrz.librarymanagement.book.model;
+package com.yusufcandmrz.librarymanagement.book.entity;
 
 public enum BookStatus {
     AVAILABLE,
