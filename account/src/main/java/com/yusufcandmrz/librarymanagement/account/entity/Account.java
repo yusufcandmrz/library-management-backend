@@ -1,6 +1,8 @@
 package com.yusufcandmrz.librarymanagement.account.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -10,17 +12,17 @@ import java.util.UUID;
 public class Account {
 
     @Id
-    @GeneratedValue()
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
     @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "second_name")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @Column(name = "password")
@@ -28,11 +30,13 @@ public class Account {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Status role;//(Enum: 'ACTIVE', 'INACTIVE')
+    private Status role;
 
-    @Column(name = "created_at")
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 }
