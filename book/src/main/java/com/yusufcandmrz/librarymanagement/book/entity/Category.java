@@ -1,9 +1,11 @@
 package com.yusufcandmrz.librarymanagement.book.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -11,8 +13,8 @@ import java.util.UUID;
 public class Category {
 
     @Id
-    @GeneratedValue()
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
     @Column(name = "name")
@@ -22,15 +24,17 @@ public class Category {
     @JoinTable(name = "book_category",
     joinColumns = @JoinColumn(name = "category_id"),
     inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private List<Book> bookList;
+    private Set<Book> bookList;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
 
-    @Column(name = "created_at")
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 }

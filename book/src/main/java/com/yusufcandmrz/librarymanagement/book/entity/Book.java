@@ -1,17 +1,20 @@
 package com.yusufcandmrz.librarymanagement.book.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.List;
+import java.sql.Timestamp;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "book")
 public class Book {
 
-    @Column(name = "id")
-    @GeneratedValue
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     private UUID id;
 
     @Column(name = "title")
@@ -20,12 +23,12 @@ public class Book {
     @Column(name = "author")
     private String author;
 
-    @Column(name = "isbn", unique = true)
+    @Column(name = "isbn", unique = true, nullable = false)
     private String isbn;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "book_category", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<Category> categoryList;
+    private Set<Category> categoryList;
 
     @Column(name = "translator")
     private String translator;
@@ -34,13 +37,15 @@ public class Book {
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-    @Column(name = "status")
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private BookStatus status;
 
-    @Column(name = "created_at")
-    private String createdAt;
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private Timestamp createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
-    private String updatedAt;
+    private Timestamp updatedAt;
 }
