@@ -9,10 +9,4 @@ TODO LIST
 - Add Reservation Service
 - Add 2-Factor Authentication
 - (Optional) Add columns: created_by, updated_by
-- Message Queue
-- Logging
-- Circuit Breaker
-- Docker
-- Rate Limiting
-- Validation Standarts
-- Documenting
+- (Optional) Add extendDueDate method to Book service
