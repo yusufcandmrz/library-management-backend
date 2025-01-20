@@ -14,7 +14,7 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
     @Column(name = "title")
@@ -36,6 +36,9 @@ public class Book {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
+
+    @Column(name = "quantity")
+    private int quantity;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
