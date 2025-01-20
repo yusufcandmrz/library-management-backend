@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
-@Table(name = "account")
 public class Account {
 
     @Id
@@ -29,7 +28,7 @@ public class Account {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     private Status role;
 
     @CreationTimestamp
