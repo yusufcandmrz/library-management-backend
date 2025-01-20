@@ -1,4 +1,4 @@
-DROP USER if exists 'yusufcandmrz'@'%' ;
+DROP USER IF EXISTS 'yusufcandmrz'@'%';
 
 CREATE USER 'yusufcandmrz'@'%' IDENTIFIED BY 'yusufcandmrz';
 
