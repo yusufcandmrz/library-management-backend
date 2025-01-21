@@ -1,6 +1,7 @@
 package com.yusufcandmrz.librarymanagement.loan.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "loan")
+@Data
 public class Loan {
 
     @Id
