@@ -4,8 +4,9 @@ import com.yusufcandmrz.librarymanagement.account.entity.Status;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
-
+@Data
 public class AccountCreateRequest {
 
     @NotBlank(message = "First name is required")

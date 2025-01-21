@@ -1,6 +1,8 @@
 package com.yusufcandmrz.librarymanagement.account.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,6 +10,8 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
+@Table(name = "account")
+@Data
 public class Account {
 
     @Id
