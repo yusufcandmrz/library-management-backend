@@ -1,6 +1,8 @@
 package com.yusufcandmrz.librarymanagement.account.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,6 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "account")
+@Data
 public class Account {
 
     @Id
@@ -24,9 +27,6 @@ public class Account {
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
-
-    @Column(name = "password")
-    private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
