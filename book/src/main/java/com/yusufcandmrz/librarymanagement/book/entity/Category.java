@@ -1,6 +1,7 @@
 package com.yusufcandmrz.librarymanagement.book.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "category")
+@Data
 public class Category {
 
     @Id
