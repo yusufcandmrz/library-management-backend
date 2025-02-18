@@ -30,7 +30,11 @@ public class Account {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Status role;
+    private Role role;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
