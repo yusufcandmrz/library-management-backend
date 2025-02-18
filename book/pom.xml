@@ -12,7 +12,7 @@
 	<artifactId>book</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>book</name>
-	<description>User for Library Management</description>
+	<description>Library Management</description>
 	<url/>
 	<licenses>
 		<license/>
