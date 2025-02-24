@@ -2,12 +2,11 @@ package com.yusufcandmrz.librarymanagement.account.service;
 
 import com.yusufcandmrz.librarymanagement.account.entity.Account;
 import com.yusufcandmrz.librarymanagement.account.repository.AccountRepository;
-import com.yusufcandmrz.librarymanagement.account.request.AccountCreateRequest;
+import com.yusufcandmrz.librarymanagement.account.dto.request.AccountCreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

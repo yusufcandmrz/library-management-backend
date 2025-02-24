@@ -1,7 +1,7 @@
 package com.yusufcandmrz.librarymanagement.account.controller;
 
 import com.yusufcandmrz.librarymanagement.account.entity.Account;
-import com.yusufcandmrz.librarymanagement.account.request.AccountCreateRequest;
+import com.yusufcandmrz.librarymanagement.account.dto.request.AccountCreateRequest;
 import com.yusufcandmrz.librarymanagement.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

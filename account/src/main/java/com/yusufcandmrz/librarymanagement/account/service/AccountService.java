@@ -1,7 +1,7 @@
 package com.yusufcandmrz.librarymanagement.account.service;
 
 import com.yusufcandmrz.librarymanagement.account.entity.Account;
-import com.yusufcandmrz.librarymanagement.account.request.AccountCreateRequest;
+import com.yusufcandmrz.librarymanagement.account.dto.request.AccountCreateRequest;
 
 import java.util.UUID;
 

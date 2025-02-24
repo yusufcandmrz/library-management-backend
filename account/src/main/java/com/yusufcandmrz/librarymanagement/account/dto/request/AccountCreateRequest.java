@@ -1,4 +1,4 @@
-package com.yusufcandmrz.librarymanagement.account.request;
+package com.yusufcandmrz.librarymanagement.account.dto.request;
 
 import com.yusufcandmrz.librarymanagement.account.entity.Status;
 import jakarta.validation.constraints.Email;
