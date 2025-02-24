@@ -1,6 +1,10 @@
 package com.yusufcandmrz.librarymanagement.auth.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,10 +13,15 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "auth")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 public class Auth {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     private UUID id;
 
     @Column(name = "email", unique = true, nullable = false)

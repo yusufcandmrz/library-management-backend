@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface AuthRepository extends JpaRepository<Auth, UUID> { }
+public interface AuthRepository extends JpaRepository<Auth, UUID> {
+    public Auth findByEmail(String email);
+}
