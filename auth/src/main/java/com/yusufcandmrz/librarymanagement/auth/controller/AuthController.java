@@ -31,7 +31,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Boolean> login(@RequestBody LoginRequest request) {
-
         return new ResponseEntity<Boolean>(authService.login(request), HttpStatus.OK);
     }
 }

@@ -24,18 +24,17 @@ public class AuthServiceImp implements AuthService {
 
     @Override
     public Auth register(RegisterRequest request) {
-        if(!request.getPassword().equals(request.getPasswordAgain())) {
-            // Handle this code line
+        if (!request.getPassword().equals(request.getPasswordAgain())) {
+            throw new RuntimeException("Passwords do not match");
+        } else if (authRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("Email already exists");
+        } else {
+            return authRepository.save(modelMapper.map(request, Auth.class));
         }
-        // Check that e-mail and password are valid
-        // Control that e-mail is used before. Need to Account service
-        // Create Auth
-        Auth auth = modelMapper.map(request, Auth.class);
-        return authRepository.save(auth);
     }
 
     @Override
-    public boolean login(LoginRequest request) {
-        return false;
+    public Boolean login(LoginRequest request) {
+        return authRepository.existsByEmailAndPassword(request.getEmail(), request.getPassword());
     }
 }

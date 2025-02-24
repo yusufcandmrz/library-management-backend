@@ -12,5 +12,5 @@ public interface AuthService {
 
     public Auth register(RegisterRequest request);
 
-    public boolean login(LoginRequest request);
+    public Boolean login(LoginRequest request);
 }
