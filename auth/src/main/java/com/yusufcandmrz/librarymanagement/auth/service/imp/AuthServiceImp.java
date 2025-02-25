@@ -24,10 +24,10 @@ public class AuthServiceImp implements AuthService {
 
     @Override
     public Auth register(RegisterRequest request) {
-        if (!request.getPassword().equals(request.getPasswordAgain())) {
+        if (!request.isPasswordsMatches()) {
             throw new RuntimeException("Passwords do not match");
-        } else if (authRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
+        } else if (authRepository.existsByUsername(request.getUsername())) {
+            throw new RuntimeException("Username already exists");
         } else {
             return authRepository.save(modelMapper.map(request, Auth.class));
         }
@@ -35,6 +35,6 @@ public class AuthServiceImp implements AuthService {
 
     @Override
     public Boolean login(LoginRequest request) {
-        return authRepository.existsByEmailAndPassword(request.getEmail(), request.getPassword());
+        return authRepository.existsByUsernameAndPassword(request.getUsername(), request.getPassword());
     }
 }

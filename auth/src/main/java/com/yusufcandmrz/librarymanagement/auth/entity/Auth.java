@@ -24,15 +24,18 @@ public class Auth {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "email", unique = true, nullable = false)
-    private String email;
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
 
     @Column(name = "password")
     private String password;
 
+    @Column(name = "role")
+    private Role role;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private Status status;
+    private Status status = Status.ACTIVE;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
