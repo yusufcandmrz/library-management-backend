@@ -3,6 +3,7 @@ package com.yusufcandmrz.librarymanagement.account.service;
 import com.yusufcandmrz.librarymanagement.account.entity.Account;
 import com.yusufcandmrz.librarymanagement.account.repository.AccountRepository;
 import com.yusufcandmrz.librarymanagement.account.dto.request.AccountCreateRequest;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,26 +14,17 @@ import java.util.UUID;
 public class AccountServiceImp implements AccountService {
 
     AccountRepository accountRepository;
+    ModelMapper modelMapper;
 
     @Autowired
-    public AccountServiceImp(AccountRepository accountRepository) {
+    public AccountServiceImp(AccountRepository accountRepository, ModelMapper modelMapper) {
         this.accountRepository = accountRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public Account createAccount(AccountCreateRequest request) {
-        if (!request.isPasswordMatch()) {
-            throw new IllegalArgumentException("Passwords do not match");
-        }
-        Account account = new Account();
-        account.setFirstName(request.getFirstName());
-        account.setLastName(request.getLastName());
-        account.setEmail(request.getEmail());
-        account.setPassword(request.getPassword());
-        account.setRole(request.getRole());
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        account.setCreatedAt(currentTime);
-        account.setUpdatedAt(currentTime);
+        Account account = modelMapper.map(request, Account.class);
         return accountRepository.save(account);
     }
 

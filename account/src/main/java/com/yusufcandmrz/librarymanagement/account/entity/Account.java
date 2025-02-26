@@ -15,7 +15,6 @@ import java.util.UUID;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
@@ -27,10 +26,6 @@ public class Account {
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")

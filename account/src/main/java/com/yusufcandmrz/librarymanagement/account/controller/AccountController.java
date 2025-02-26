@@ -23,14 +23,12 @@ public class AccountController {
 
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody AccountCreateRequest request) {
-        Account account = accountService.createAccount(request);
-        return new ResponseEntity<Account>(account, HttpStatus.CREATED);
+        return new ResponseEntity<Account>(accountService.createAccount(request), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Account> readAccountById(@PathVariable UUID id) {
-        Account account = accountService.readAccountById(id);
-        return new ResponseEntity<Account>(account, HttpStatus.OK);
+        return new ResponseEntity<Account>(accountService.readAccountById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
