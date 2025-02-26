@@ -1,9 +1,11 @@
 package com.yusufcandmrz.librarymanagement.auth.service.imp;
 
+import com.yusufcandmrz.librarymanagement.auth.dto.request.AccountCreateRequest;
 import com.yusufcandmrz.librarymanagement.auth.dto.request.LoginRequest;
 import com.yusufcandmrz.librarymanagement.auth.dto.request.RegisterRequest;
-import com.yusufcandmrz.librarymanagement.auth.dto.response.RegisterResponse;
+import com.yusufcandmrz.librarymanagement.auth.entity.Account;
 import com.yusufcandmrz.librarymanagement.auth.entity.Auth;
+import com.yusufcandmrz.librarymanagement.auth.manager.AccountManager;
 import com.yusufcandmrz.librarymanagement.auth.repository.AuthRepository;
 import com.yusufcandmrz.librarymanagement.auth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,13 @@ public class AuthServiceImp implements AuthService {
 
     AuthRepository authRepository;
     ModelMapper modelMapper;
+    AccountManager accountManager;
 
     @Autowired
-    public AuthServiceImp(AuthRepository authRepository, ModelMapper modelMapper) {
+    public AuthServiceImp(AuthRepository authRepository, ModelMapper modelMapper, AccountManager accountManager) {
         this.authRepository = authRepository;
         this.modelMapper = modelMapper;
+        this.accountManager = accountManager;
     }
 
     @Override
@@ -29,7 +33,11 @@ public class AuthServiceImp implements AuthService {
         } else if (authRepository.existsByUsername(request.getUsername())) {
             throw new RuntimeException("Username already exists");
         } else {
-            return authRepository.save(modelMapper.map(request, Auth.class));
+            Auth auth = authRepository.save(modelMapper.map(request, Auth.class));
+            AccountCreateRequest accountCreateRequest = new AccountCreateRequest();
+            accountCreateRequest.setId(auth.getId());
+            accountManager.createAccount(accountCreateRequest);
+            return auth;
         }
     }
 
