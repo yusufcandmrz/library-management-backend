@@ -1,12 +1,13 @@
 package com.yusufcandmrz.librarymanagement.account.dto.request;
 
-import lombok.*;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Data
 public class AccountCreateRequest {
 
@@ -14,4 +15,5 @@ public class AccountCreateRequest {
     private String firstName;
     private String lastName;
     private String email;
+    private String phoneNumber;
 }

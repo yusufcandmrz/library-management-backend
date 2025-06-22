@@ -1,12 +1,12 @@
 package com.yusufcandmrz.librarymanagement.account.controller;
 
-import com.yusufcandmrz.librarymanagement.account.entity.Account;
 import com.yusufcandmrz.librarymanagement.account.dto.request.AccountCreateRequest;
+import com.yusufcandmrz.librarymanagement.account.dto.response.AccountDto;
 import com.yusufcandmrz.librarymanagement.account.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 import java.util.UUID;
 
@@ -21,14 +21,15 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping
-    public ResponseEntity<Account> createAccount(@RequestBody AccountCreateRequest request) {
-        return new ResponseEntity<Account>(accountService.createAccount(request), HttpStatus.CREATED);
+    @PostMapping()
+    public ResponseEntity<Void> createAccount(@RequestBody AccountCreateRequest request) {
+        accountService.createAccount(request);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Account> readAccountById(@PathVariable UUID id) {
-        return new ResponseEntity<Account>(accountService.readAccountById(id), HttpStatus.OK);
+    public ResponseEntity<AccountDto> readAccountById(@PathVariable UUID id) {
+        return new ResponseEntity<AccountDto>(accountService.readAccountById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

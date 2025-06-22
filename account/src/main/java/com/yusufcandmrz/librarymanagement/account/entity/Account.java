@@ -1,7 +1,6 @@
 package com.yusufcandmrz.librarymanagement.account.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -24,8 +23,11 @@ public class Account {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
