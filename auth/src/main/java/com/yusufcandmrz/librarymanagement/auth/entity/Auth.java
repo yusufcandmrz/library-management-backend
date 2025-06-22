@@ -24,12 +24,13 @@ public class Auth {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "username", unique = true, nullable = false)
-    private String username;
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
 
     @Column(name = "password")
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role = Role.MEMBER;
 

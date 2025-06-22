@@ -2,8 +2,6 @@ package com.yusufcandmrz.librarymanagement.auth.controller;
 
 import com.yusufcandmrz.librarymanagement.auth.dto.request.LoginRequest;
 import com.yusufcandmrz.librarymanagement.auth.dto.request.RegisterRequest;
-import com.yusufcandmrz.librarymanagement.auth.dto.response.RegisterResponse;
-import com.yusufcandmrz.librarymanagement.auth.entity.Auth;
 import com.yusufcandmrz.librarymanagement.auth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,8 +23,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Auth> register(@RequestBody RegisterRequest request) {
-        return new ResponseEntity<Auth>(authService.register(request), HttpStatus.CREATED);
+    public ResponseEntity<Void> register(@RequestBody RegisterRequest request) {
+        authService.register(request);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
