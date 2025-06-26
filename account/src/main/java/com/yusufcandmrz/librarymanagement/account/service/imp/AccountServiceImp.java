@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yusufcandmrz.librarymanagement.account.dto.response.AccountDto;
 import com.yusufcandmrz.librarymanagement.account.entity.Account;
 import com.yusufcandmrz.librarymanagement.account.entity.Status;
+import com.yusufcandmrz.librarymanagement.account.exception.NotFoundException;
 import com.yusufcandmrz.librarymanagement.account.repository.AccountRepository;
 import com.yusufcandmrz.librarymanagement.account.dto.request.AccountCreateRequest;
 import com.yusufcandmrz.librarymanagement.account.service.AccountService;
@@ -37,13 +38,14 @@ public class AccountServiceImp implements AccountService {
 
     @Override
     public AccountDto readAccountById(UUID id) {
-        Account account = accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Account did not found"));
+        Account account = accountRepository.findById(id).orElseThrow(() -> new NotFoundException("Account did not found"));
+        System.out.println("account -> " + account);
         return convertToDto(account);
     }
 
     @Override
     public void deleteAccountById(UUID id) {
-        Account account = accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Account did not found"));
+        Account account = accountRepository.findById(id).orElseThrow(() -> new NotFoundException("Account did not found"));
         account.setStatus(Status.INACTIVE);
         accountRepository.save(account);
     }
