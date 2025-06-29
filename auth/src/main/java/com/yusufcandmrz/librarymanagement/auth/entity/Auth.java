@@ -24,7 +24,7 @@ public class Auth {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "password")

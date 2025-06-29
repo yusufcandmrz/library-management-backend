@@ -44,7 +44,7 @@ public class AuthServiceImp implements AuthService {
         if (!request.isPasswordsMatches()) {
             throw new BadRequestException("Passwords do not match");
         }
-        if (authRepository.existsByEmail(request.getEmail())) {
+        if (authRepository.existsByEmailAndActive(request.getEmail())) {
             throw new BadRequestException("Email already exists");
         }
         Auth auth = authRepository.save(modelMapper.map(request, Auth.class));
@@ -67,7 +67,7 @@ public class AuthServiceImp implements AuthService {
 
     @Override
     public Boolean login(LoginRequest request) {
-        return authRepository.existsByEmailAndPassword(request.getEmail(), request.getPassword());
+        return authRepository.existsByEmailAndPasswordAndActive(request.getEmail(), request.getPassword());
     }
 
     @Override
