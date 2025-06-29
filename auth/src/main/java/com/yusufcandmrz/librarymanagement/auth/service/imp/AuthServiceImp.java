@@ -1,11 +1,13 @@
 package com.yusufcandmrz.librarymanagement.auth.service.imp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yusufcandmrz.librarymanagement.account.exception.NotFoundException;
 import com.yusufcandmrz.librarymanagement.auth.dto.request.AccountCreateRequest;
 import com.yusufcandmrz.librarymanagement.auth.dto.request.LoginRequest;
 import com.yusufcandmrz.librarymanagement.auth.dto.request.RegisterRequest;
 import com.yusufcandmrz.librarymanagement.auth.dto.response.AuthDto;
 import com.yusufcandmrz.librarymanagement.auth.entity.Auth;
+import com.yusufcandmrz.librarymanagement.auth.entity.Status;
 import com.yusufcandmrz.librarymanagement.auth.exception.BadRequestException;
 import com.yusufcandmrz.librarymanagement.auth.manager.AccountManager;
 import com.yusufcandmrz.librarymanagement.auth.repository.AuthRepository;
@@ -14,6 +16,9 @@ import com.yusufcandmrz.librarymanagement.auth.kafka.KafkaProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AuthServiceImp implements AuthService {
@@ -63,6 +68,20 @@ public class AuthServiceImp implements AuthService {
     @Override
     public Boolean login(LoginRequest request) {
         return authRepository.existsByEmailAndPassword(request.getEmail(), request.getPassword());
+    }
+
+    @Override
+    public void deleteAccountById(UUID id) {
+        Auth auth = authRepository.findById(id).orElseThrow(() -> new NotFoundException("Account did not found"));
+        auth.setStatus(Status.INACTIVE);
+        authRepository.save(auth);
+        try {
+            accountManager.deleteAccountById(id);
+        } catch (RuntimeException e) {
+            auth.setStatus(Status.ACTIVE);
+            authRepository.save(auth);
+            throw new RuntimeException(e);
+        }
     }
 
     public AuthDto convertToDto(Auth auth) {

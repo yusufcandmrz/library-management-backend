@@ -24,17 +24,17 @@ public class AccountController {
     @PostMapping()
     public ResponseEntity<Void> createAccount(@RequestBody AccountCreateRequest request) {
         accountService.createAccount(request);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AccountDto> readAccountById(@PathVariable UUID id) {
-        return new ResponseEntity<AccountDto>(accountService.readAccountById(id), HttpStatus.OK);
+        return new ResponseEntity<>(accountService.readAccountById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAccountById(@PathVariable UUID id) {
         accountService.deleteAccountById(id);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

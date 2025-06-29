@@ -6,10 +6,9 @@ import com.yusufcandmrz.librarymanagement.auth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/auth")
@@ -25,11 +24,17 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody RegisterRequest request) {
         authService.register(request);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
     public ResponseEntity<Boolean> login(@RequestBody LoginRequest request) {
-        return new ResponseEntity<Boolean>(authService.login(request), HttpStatus.OK);
+        return new ResponseEntity<>(authService.login(request), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAccountById(@PathVariable UUID id) {
+        authService.deleteAccountById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
