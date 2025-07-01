@@ -38,14 +38,16 @@ public class AccountServiceImp implements AccountService {
 
     @Override
     public AccountDto readAccountById(UUID id) {
-        Account account = accountRepository.findById(id).orElseThrow(() -> new NotFoundException("Account did not found"));
-        System.out.println("account -> " + account);
+        Account account = accountRepository.findByIdAndActive(id);
+        if (account == null) {
+            throw new NotFoundException("Account not found");
+        }
         return convertToDto(account);
     }
 
     @Override
     public void deleteAccountById(UUID id) {
-        Account account = accountRepository.findById(id).orElseThrow(() -> new NotFoundException("Account did not found"));
+        Account account = accountRepository.findById(id).orElseThrow(() -> new NotFoundException("Account not found"));
         account.setStatus(Status.INACTIVE);
         accountRepository.save(account);
     }

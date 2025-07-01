@@ -72,7 +72,7 @@ public class AuthServiceImp implements AuthService {
 
     @Override
     public void deleteAccountById(UUID id) {
-        Auth auth = authRepository.findById(id).orElseThrow(() -> new NotFoundException("Account did not found"));
+        Auth auth = authRepository.findById(id).orElseThrow(() -> new NotFoundException("Account not found"));
         auth.setStatus(Status.INACTIVE);
         authRepository.save(auth);
         try {
