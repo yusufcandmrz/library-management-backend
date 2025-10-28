@@ -1,9 +1,8 @@
 package com.yusufcandmrz.librarymanagement.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Reader {
@@ -15,4 +14,7 @@ public class Reader {
     private String name;
 
     private String email;
+
+    //TODO add a relation
+    private List<Book> borrowedBooks;
 }
