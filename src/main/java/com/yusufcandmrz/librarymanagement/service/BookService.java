@@ -1,4 +1,7 @@
 package com.yusufcandmrz.librarymanagement.service;
 
-public class BookService {
+import org.springframework.stereotype.Service;
+
+@Service
+public interface BookService {
 }
