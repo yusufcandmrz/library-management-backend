@@ -1,9 +1,6 @@
 package com.yusufcandmrz.librarymanagement.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Book {
@@ -17,4 +14,8 @@ public class Book {
     private String author;
 
     private boolean available = true;
+
+    @ManyToOne
+    @JoinColumn(name = "reader_id")
+    private Reader reader;
 }

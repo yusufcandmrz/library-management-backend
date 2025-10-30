@@ -2,7 +2,7 @@ package com.yusufcandmrz.librarymanagement.entity;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Reader {
@@ -15,6 +15,6 @@ public class Reader {
 
     private String email;
 
-    //TODO add a relation
-    private List<Book> borrowedBooks;
+    @OneToMany(mappedBy = "reader")
+    private Set<Book> borrowedBooks;
 }
