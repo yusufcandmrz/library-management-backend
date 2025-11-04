@@ -5,8 +5,11 @@ import com.yusufcandmrz.librarymanagement.dto.UpdateBookRequest;
 import com.yusufcandmrz.librarymanagement.entity.Book;
 import com.yusufcandmrz.librarymanagement.service.BookService;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class BookServiceImp implements BookService {
     @Override
     public void addBook(AddBookRequest request) {
